@@ -5,6 +5,7 @@ import { Stage, Graphics, Sprite, Container } from "@pixi/react";
 export function Waveform() {
   const first = useRef(true);
   const [tick, setTick] = useState(0);
+  const width = 800;
   const height = 600;
   const fps = 30;
 
@@ -30,7 +31,7 @@ export function Waveform() {
     g.moveTo(0, height / 2); // Start at the middle of the canvas
 
     // Draw the sine wave
-    for (let x = 0; x <= 800; x++) {
+    for (let x = 0; x <= width; x++) {
       const y = height / 2 + amplitude * Math.sin(frequency * x);
 
       g.lineTo(x, y);
@@ -39,13 +40,13 @@ export function Waveform() {
 
   const bunnyUrl = "https://pixijs.io/pixi-react/img/bunny.png";
   return (
-    <Stage width={800} height={height} options={{ background: 0x1099bb }}>
+    <Stage width={width} height={height} options={{ background: 0x1099bb }}>
       <Sprite
         image={bunnyUrl}
         x={
           fps % 2 === 0
-            ? (800 / fps) * tick - 30
-            : (800 / fps) * (tick - 1) - 30
+            ? (width / fps) * tick - 30
+            : (width / fps) * (tick - 1) - 30
         }
         y={0}
       />
@@ -53,7 +54,7 @@ export function Waveform() {
         <Graphics
           draw={drawSineWave}
           height={100}
-          width={800}
+          width={width}
           x={0}
           y={0}
         ></Graphics>
